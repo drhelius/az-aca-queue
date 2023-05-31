@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/drhelius/az-function-queue/internal/http"
-	"github.com/drhelius/az-function-queue/internal/queue"
+	"github.com/drhelius/az-aca-queue/internal/http"
+	"github.com/drhelius/az-aca-queue/internal/queue"
 )
 
 func main() {

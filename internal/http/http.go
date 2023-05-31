@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/drhelius/az-function-queue/internal/queue"
+	"github.com/drhelius/az-aca-queue/internal/queue"
 )
 
 func Serve(http_port string) {

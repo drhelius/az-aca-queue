@@ -1,5 +1,6 @@
 APP_NAME=azqueue
 BINARY_PATH=bin
+DOCKER_REPO=drhelius.azurecr.io
 
 CMD_MAIN_PATH=cmd/$(APP_NAME)/main.go
 CMD_BINARY_PATH=$(BINARY_PATH)/$(APP_NAME)
@@ -23,3 +24,7 @@ docker-build:
 docker-run:
 	. ./test.env
 	docker run --env-file test.env -p $(CMD_SERVER_PORT):$(CMD_SERVER_PORT) $(APP_NAME)
+
+docker-push:
+	docker tag $(APP_NAME) $(DOCKER_REPO)/$(APP_NAME):latest
+	docker push $(DOCKER_REPO)/$(APP_NAME):latest

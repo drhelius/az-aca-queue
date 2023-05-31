@@ -1,4 +1,4 @@
-module github.com/drhelius/az-function-queue
+module github.com/drhelius/az-aca-queue
 
 go 1.18
 
