@@ -1,0 +1,48 @@
+location: northeurope
+name: azqueue
+resourceGroup: push
+type: Microsoft.App/containerApps
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      external: true
+      allowInsecure: false
+      targetPort: 8080
+      traffic:
+        - latestRevision: true
+          weight: 100
+      transport: Auto
+    registries:
+    - identity: system
+      passwordSecretRef: ''
+      server: drhelius.azurecr.io
+      username: ''
+  template:
+    containers:
+    - env:
+      - name: ACCOUNT_NAME
+        value: xxxxx
+      - name: ACCOUNT_KEY
+        value: xxxxx
+      - name: SERVICE_URL
+        value: https://xxxxx.queue.core.windows.net
+      - name: STATIC_QUEUE_NAME
+        value: test-queue
+      - name: RANDOM_QUEUE_PREFIX
+        value: test
+      image: drhelius.azurecr.io/azqueue:latest
+      name: azqueue
+      resources:
+        cpu: 2.0
+        memory: 4Gi
+      probes:
+      - type: readiness
+        httpGet:
+          path: "/health"
+          port: 8080
+        initialDelaySeconds: 0
+        periodSeconds: 1
+    scale:
+      maxReplicas: 50
+      minReplicas: 5
